@@ -21,4 +21,9 @@ if [ -f /usr/share/debconf/confmodule ]; then
 	fi
 fi
 
+# remove legacy apache configuration which is now in duty of dh_apache2
+if [ `readlink /etc/apache2/conf.d/postfixadmin` == "../../postfixadmin/apache.conf" ]; then
+    rm -f /etc/apache2/conf.d/postfixadmin
+fi
+
 #DEBHELPER#
