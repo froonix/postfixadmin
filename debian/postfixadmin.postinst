@@ -10,6 +10,11 @@ if [ "$1" = "configure" ]; then
 	dbc_go postfixadmin $@
 fi
 
+# remove legacy apache configuration symlink, this is no longer supported with Apache 2.4
+if [ "$(readlink /etc/apache2/conf.d/postfixadmin)" = "../../postfixadmin/apache.conf" ]; then
+    rm -f /etc/apache2/conf.d/postfixadmin
+fi
+
 #DEBHELPER#
 
 exit 0

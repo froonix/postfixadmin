@@ -8,9 +8,4 @@ if [ -f /usr/share/dbconfig-common/dpkg/prerm ]; then
         dbc_go postfixadmin $@
 fi
 
-# remove legacy apache configuration which is now in duty of dh_apache2
-if [ `readlink /etc/apache2/conf.d/postfixadmin` == "../../postfixadmin/apache.conf" ]; then
-    rm -f /etc/apache2/conf.d/postfixadmin
-fi
-
 #DEBHELPER#
