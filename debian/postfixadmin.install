@@ -6,4 +6,4 @@ languages	usr/share/postfixadmin
 model		usr/share/postfixadmin
 templates	usr/share/postfixadmin
 users		usr/share/postfixadmin
-debian/lighttpd.conf	etc/postfixadmin
+debian/lighttpd/postfixadmin.conf	etc/lighttpd/conf-available

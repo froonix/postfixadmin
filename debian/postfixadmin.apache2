@@ -1,1 +1,1 @@
-conf debian/postfixadmin.conf
+conf debian/apache/postfixadmin.conf
