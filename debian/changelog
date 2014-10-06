@@ -1,3 +1,29 @@
+postfixadmin (2.3.7-1) unstable; urgency=medium
+
+  [ Norman Meßtorff ]
+  * [76ef] change recommends of postgresql-server (not existing) to postgresql.
+    Thanks to Michael Neuffer (Closes: 699602)
+  * [4bb5] Change suggestion of transitional package dovecot-common
+    to dovecot-core
+  * [f06f] Add new recommended package 'zendframework'
+    Thanks to Benedikt Trefzer (Closes: 684080)
+  * [d25a] rules: remove not needed target 'prep'
+  * [47f7] control: update standards-version to 3.9.5 without changes
+  * [6f51] Imported Upstream version 2.3.7 (Closes: #741969)
+  * [4256] Remove patch 0002-fix-sql-injection_show_alias
+  * [0e04] Update Vcs-* tags in control file
+  * [4f90] remove legacy apache configuration in prerm, if existing
+
+  [ Gaudenz Steinlin ]
+  * [a5a3] Apache 2.4 transition (Closes: #669834)
+  * [68fe] Use doveadm pw instead of dovecotpw by default (Closes: #706698)
+  * [1da4] Remove wwwconfig-common support (Closes: #691936, #719933)
+  * [b509] Add myself as uploader
+  * [f628] Rename lighttpd config to 90-postfixadmin.conf
+  * [a0e6] Remove config symlink for lighttpd in postinst
+
+ -- Gaudenz Steinlin <gaudenz@debian.org>  Mon, 06 Oct 2014 13:27:25 +0200
+
 postfixadmin (2.3.5-3) unstable; urgency=high
 
   [ Norman Messtorff ]
