@@ -1,8 +1,8 @@
-postfixadmin (2.3.7-2) UNRELEASED; urgency=medium
+postfixadmin (2.3.7-2) unstable; urgency=medium
 
   * depend on php instead of php7 (closes: #821643)
 
- -- Christoph Martin <martin@uni-mainz.de>  Fri, 20 May 2016 15:27:34 +0200
+ -- Christoph Martin <martin@uni-mainz.de>  Fri, 20 May 2016 15:34:04 +0200
 
 postfixadmin (2.3.7-1) unstable; urgency=medium
 
