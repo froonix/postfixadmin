@@ -6,19 +6,18 @@
  * This source file is subject to the GPL license that is bundled with  
  * this package in the file LICENSE.TXT. 
  * 
- * Further details on the project are available at : 
- *     http://www.postfixadmin.com or http://postfixadmin.sf.net 
+ * Further details on the project are available at http://postfixadmin.sf.net 
  * 
- * @version $Id: password.php 837 2010-06-22 22:14:03Z christian_boltz $ 
+ * @version $Id: password.php 1662 2014-04-27 19:18:14Z christian_boltz $ 
  * @license GNU GPL v2 or later. 
  * 
  * File: password.php
  * Used by users to change their mailbox (and login) password.
- * Template File: users_password.php
+ * Template File: password.tpl
  *
  * Template Variables:
  *
- * tMessage
+ * none
  *
  * Form POST \ GET Variables:
  *
@@ -27,10 +26,14 @@
  * fPassword2
  */
 
+$rel_path = '../';
 require_once('../common.php');
 
 authentication_require_role('user');
 $username = authentication_get_username();
+
+$pPassword_password_text = "";
+$pPassword_password_current_text = "";
 
 if ($_SERVER['REQUEST_METHOD'] == "POST")
 {
@@ -44,11 +47,16 @@ if ($_SERVER['REQUEST_METHOD'] == "POST")
     $fPassword2 = $_POST['fPassword2'];
 
     $error = 0;
-    if(strlen($fPassword) < $CONF['min_password_length']) {
+
+    $validpass = validate_password($fPassword);
+    if(count($validpass) > 0) {
+        flash_error($validpass[0]); # TODO: honor all error messages, not only the first one
         $error += 1;
-        flash_error(sprintf($PALANG['pPasswordTooShort'], $CONF['min_password_length']));
     }
-    if(!UserHandler::login($username, $fPassword_current)) {
+ 
+    $mh = new MailboxHandler;
+
+    if(!$mh->login($username, $fPassword_current)) {
         $error += 1;
         $pPassword_password_current_text = $PALANG['pPassword_password_current_text_error'];
     }
@@ -60,23 +68,25 @@ if ($_SERVER['REQUEST_METHOD'] == "POST")
 
     if ($error == 0)
     {
-        $uh = new UserHandler($username);
-        if($uh->change_pass($fPassword_current, $fPassword)) {
-            flash_info($PALANG['pPassword_result_success']);
+        $mh->init($username); # TODO: error handling
+        if($mh->change_pw($fPassword, $fPassword_current) ) {
+            flash_info(Config::Lang_f('pPassword_result_success', $username));
             header("Location: main.php");
             exit(0);
         }
         else
         {
-            $tMessage = $PALANG['pPassword_result_error'];
+            flash_error(Config::Lang_f('pPassword_result_error', $username));
         }
     }
 }
 
-include ("../templates/header.php");
-include ("../templates/users_menu.php");
-include ("../templates/users_password.php");
-include ("../templates/footer.php");
+$smarty->assign ('SESSID_USERNAME', $username);
+$smarty->assign ('pPassword_password_current_text', $pPassword_password_current_text, false);
+$smarty->assign ('pPassword_password_text', $pPassword_password_text, false);
+
+$smarty->assign ('smarty_template', 'password');
+$smarty->display ('index.tpl');
 
 /* vim: set expandtab softtabstop=4 tabstop=4 shiftwidth=4: */
 ?>

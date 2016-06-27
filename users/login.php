@@ -6,19 +6,17 @@
  * This source file is subject to the GPL license that is bundled with  
  * this package in the file LICENSE.TXT. 
  * 
- * Further details on the project are available at : 
- *     http://www.postfixadmin.com or http://postfixadmin.sf.net 
+ * Further details on the project are available at http://postfixadmin.sf.net 
  * 
- * @version $Id: login.php 575 2009-03-13 20:48:24Z GingerDog $ 
+ * @version $Id: login.php 1665 2014-05-01 22:52:47Z christian_boltz $ 
  * @license GNU GPL v2 or later. 
  * 
  * File: login.php
  * Used to authenticate want-to-be users.
- * Template File: login.php
+ * Template File: login.tpl
  *
  * Template Variables:
  *
- *  tMessage
  *  tUsername
  *
  * Form POST \ GET Variables:  
@@ -28,47 +26,42 @@
  *  lang
  */
 
+$rel_path = '../';
+define('POSTFIXADMIN_LOGOUT', 1);
 require_once("../common.php");
 
 
-if ($_SERVER['REQUEST_METHOD'] == "GET")
-{
-   include ("../templates/header.php");
-   include ("../templates/users_login.php");
-   include ("../templates/footer.php");
-}
-
 if ($_SERVER['REQUEST_METHOD'] == "POST")
 {
-
    $lang = safepost('lang');
+   $fUsername = trim(safepost('fUsername'));
+   $fPassword = safepost('fPassword');
 
    if ( $lang != check_language(0) ) { # only set cookie if language selection was changed
       setcookie('lang', $lang, time() + 60*60*24*30); # language cookie, lifetime 30 days
       # (language preference cookie is processed even if username and/or password are invalid)
    }
 
-   $fUsername = escape_string ($_POST['fUsername']);
-   $fPassword = escape_string ($_POST['fPassword']);
-
-   if(UserHandler::login($_POST['fUsername'], $_POST['fPassword'])) {
+   $h = new MailboxHandler();
+   if($h->login($fUsername, $fPassword)) {
       session_regenerate_id();
       $_SESSION['sessid'] = array();
       $_SESSION['sessid']['roles'] = array();
       $_SESSION['sessid']['roles'][] = 'user';
       $_SESSION['sessid']['username'] = $fUsername;
+      $_SESSION['PFA_token'] = md5(uniqid(rand(), true));
       header("Location: main.php");
       exit;
+   } else {   
+      error_log("PostfixAdmin login failed (username: $fUsername)");
+      flash_error($PALANG['pLogin_failed']);
    }
-   else {   
-         $error = 1;
-         $tMessage = '<span class="error_msg">' . $PALANG['pLogin_failed'] . '</span>';
-         $tUsername = $fUsername;
-   }
-
-   include ("../templates/header.php");
-   include ("../templates/users_login.php");
-   include ("../templates/footer.php");
 }
+
+$smarty->assign ('language_selector', language_selector(), false);
+$smarty->assign ('smarty_template', 'login');
+$smarty->assign ('logintype', 'user');
+$smarty->display ('index.tpl');
+
 /* vim: set expandtab softtabstop=3 tabstop=3 shiftwidth=3: */
 ?>

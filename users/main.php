@@ -6,10 +6,9 @@
  * This source file is subject to the GPL license that is bundled with  
  * this package in the file LICENSE.TXT. 
  * 
- * Further details on the project are available at : 
- *     http://www.postfixadmin.com or http://postfixadmin.sf.net 
+ * Further details on the project are available at http://postfixadmin.sf.net 
  * 
- * @version $Id: main.php 575 2009-03-13 20:48:24Z GingerDog $ 
+ * @version $Id: main.php 1558 2013-11-10 15:57:32Z christian_boltz $ 
  * @license GNU GPL v2 or later. 
  * 
  * File: main.php
@@ -23,6 +22,7 @@
  * Form POST \ GET Variables: -none-
  */
 
+$rel_path = '../';
 require_once('../common.php');
 authentication_require_role('user');
 $USERID_USERNAME = authentication_get_username();
@@ -35,11 +35,8 @@ else
 {
    $tummVacationtext = $PALANG['pUsersMain_vacation'];
 }
-
-include ("../templates/header.php");
-include ("../templates/users_menu.php");
-include ("../templates/users_main.php");
-include ("../templates/footer.php");
-
+	$smarty->assign ('tummVacationtext', $tummVacationtext);
+	$smarty->assign ('smarty_template', 'users_main');
+	$smarty->display ('index.tpl');
 /* vim: set expandtab softtabstop=3 tabstop=3 shiftwidth=3: */
 ?>
