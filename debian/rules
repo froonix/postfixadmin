@@ -23,7 +23,6 @@ clean:
 	dh_testdir
 	dh_testroot
 	dh_clean
-	debconf-updatepo
 
 install: build
 	dh_testdir
