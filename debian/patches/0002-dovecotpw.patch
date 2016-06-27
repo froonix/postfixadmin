@@ -6,16 +6,14 @@ Applied-Upstream: fixed upstream in version 2.91
 Last-Update: 2014-10-03
 ---
 This patch header follows DEP-3: http://dep.debian.net/deps/dep3/
-Index: postfixadmin/config.inc.php
-===================================================================
---- postfixadmin.orig/config.inc.php	2014-10-02 17:21:08.000000000 +0200
-+++ postfixadmin/config.inc.php	2014-10-03 10:40:32.836919086 +0200
-@@ -111,7 +111,7 @@
- $CONF['authlib_default_flavor'] = 'md5raw';
- 
- // If you use the dovecot encryption method: where is the dovecotpw binary located?
--$CONF['dovecotpw'] = "/usr/sbin/dovecotpw";
+--- a/config.inc.php
++++ b/config.inc.php
+@@ -150,7 +150,7 @@ $CONF['authlib_default_flavor'] = 'md5ra
+ // for dovecot 1.x
+ // $CONF['dovecotpw'] = "/usr/sbin/dovecotpw";
+ // for dovecot 2.x (dovecot 2.0.0 - 2.0.7 is not supported!)
+-$CONF['dovecotpw'] = "/usr/sbin/doveadm pw";
 +$CONF['dovecotpw'] = "/usr/bin/doveadm pw";
  
- // Minimum length required for passwords. Postfixadmin will not
- // allow users to set passwords which are shorter than this value.
+ // Password validation
+ // New/changed passwords will be validated using all regular expressions in the array.
