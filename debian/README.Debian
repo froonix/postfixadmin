@@ -6,6 +6,17 @@ http://youserver/postfixadmin/setup.php works. This should
 guide you through the appropriate process.
 
 
+Integration with Postfix, Dovecot etc.
+======================================
+
+Now that PostfixAdmin is working, you need to do some configuration 
+in Postfix, Dovecot etc. so that they use the domains, mailboxes and 
+aliases you setup in PostfixAdmin.
+
+The files in /usr/share/doc/postfixadmin/ directory explain which 
+settings you need to do/change.
+
+
 Recommended and Suggested Packages
 ==================================
  - Postfix
@@ -20,3 +31,5 @@ The first stop would be the Postfixadmin Website, Forum or IRC channel.
 See :
  - http://postfixadmin.sf.net
  - #postfixadmin on irc.freenode.net
+
+ -- Christoph Martin <martin@uni-mainz.de>, Mon, 27 Jun 2016 16:58:12 +0200
