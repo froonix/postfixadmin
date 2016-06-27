@@ -1,9 +1,14 @@
 postfixadmin (2.93-1) unstable; urgency=low
 
+  [ David Goodwin ]
   * New upstream release (effectively beta3 for v3.0)
   * update dependencies to allow mariadb as database
 
- -- David Goodwin <david@palepurple.co.uk>  Sat, 26 Sep 2015 15:05:00 +0100
+  [ Christoph Martin ]
+  * merge to Debian build
+  * include patch remove code which needs mysql >= 5.6
+
+ -- Christoph Martin <martin@uni-mainz.de>  Mon, 27 Jun 2016 17:22:29 +0200
 
 postfixadmin (2.3.7-2) unstable; urgency=medium
 
