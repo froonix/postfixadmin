@@ -4,7 +4,7 @@ Priority: optional
 Maintainer: Norman Messtorff <normes@normes.org>
 Uploaders: Gaudenz Steinlin <gaudenz@debian.org>, Christoph Martin <martin@uni-mainz.de>
 Build-Depends: debhelper (>= 7), po-debconf, dh-apache2
-Standards-Version: 3.9.5
+Standards-Version: 3.9.6
 Vcs-Git: https://anonscm.debian.org/git/collab-maint/postfixadmin.git
 Vcs-Browser: https://anonscm.debian.org/cgit/collab-maint/postfixadmin.git
 Homepage: http://postfixadmin.sourceforge.net
