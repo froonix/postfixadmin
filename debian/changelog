@@ -1,3 +1,10 @@
+postfixadmin (2.93-2) unstable; urgency=medium
+
+  * add fix for missing token bug (closes: #825151)
+  * add depend on php-mbstring
+
+ -- Christoph Martin <christoph.martin@uni-mainz.de>  Thu, 07 Jul 2016 16:36:08 +0200
+
 postfixadmin (2.93-1) unstable; urgency=low
 
   [ David Goodwin ]
