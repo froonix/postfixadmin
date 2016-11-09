@@ -8,7 +8,7 @@
  * 
  * Further details on the project are available at http://postfixadmin.sf.net 
  * 
- * @version $Id: common.php 1792 2015-07-12 12:09:34Z gingerdog $ 
+ * @version $Id: common.php 1846 2016-05-22 16:57:09Z christian_boltz $ 
  * @license GNU GPL v2 or later. 
  * 
  * File: common.php
@@ -22,6 +22,7 @@ if(!defined('POSTFIXADMIN')) { # already defined if called from setup.php
     if (!defined('POSTFIXADMIN_CLI')) {
         // this is the default; see also https://sourceforge.net/p/postfixadmin/bugs/347/
         session_cache_limiter('nocache'); 
+        session_name('postfixadmin_session');
         session_start();
 
         if (defined('POSTFIXADMIN_LOGOUT')) {

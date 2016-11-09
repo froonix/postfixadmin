@@ -8,7 +8,7 @@
  * 
  * Further details on the project are available at http://postfixadmin.sf.net 
  * 
- * @version $Id: list-virtual.php 1777 2015-04-06 22:09:18Z christian_boltz $ 
+ * @version $Id: list-virtual.php 1822 2015-12-06 23:27:45Z christian_boltz $ 
  * @license GNU GPL v2 or later. 
  * 
  * File: list-virtual.php
@@ -434,7 +434,8 @@ if(empty($_GET['domain'])) {
     $_GET['domain'] = '';
 }
 $smarty->assign ('admin_list', array());
-$smarty->assign ('select_options', select_options ($list_domains, array ($fDomain)), false);
+$smarty->assign ('domain_list', $list_domains);
+$smarty->assign ('domain_selected', $fDomain);
 $smarty->assign ('nav_bar_alias', array ('top' => $nav_bar_alias->display_top (), 'bottom' => $nav_bar_alias->display_bottom ()), false);
 $smarty->assign ('nav_bar_mailbox', array ('top' => $nav_bar_mailbox->display_top (), 'bottom' => $nav_bar_mailbox->display_bottom ()), false);
 

@@ -2,7 +2,7 @@
 #
 # Virtual Vacation 4.0r1
 #
-# $Revision: 1676 $
+# $Revision: 1857 $
 # Originally by Mischa Peters <mischa at high5 dot net>
 #
 # Copyright (c) 2002 - 2005 High5!
@@ -114,8 +114,10 @@
 # http://dag.wieers.com/home-made/apt/packages.php
 #
 
+use utf8;
 use DBI;
-use MIME::Base64;
+use MIME::Base64 qw(encode_base64);
+use Encode qw(encode decode);
 use MIME::EncWords qw(:all);
 use Email::Valid;
 use strict;
@@ -520,6 +522,7 @@ sub send_vacation_email {
         $logger->debug("Will send vacation response for $orig_messageid: FROM: $email (orig_to: $orig_to), TO: $orig_from; VACATION SUBJECT: $row[0] ; VACATION BODY: $row[1]");
 
         my $subject = $row[0];
+        $orig_subject = decode("mime-header", $orig_subject);
         $subject =~ s/\$SUBJECT/$orig_subject/g;
         if ($subject ne $row[0]) {
           $logger->debug("Patched Subject of vacation message to: $subject");
@@ -550,7 +553,7 @@ sub send_vacation_email {
             'from' => $from,
             'fake_from' => $friendly_from . " <$from>",
             'to' => $to,
-            'msg' => encode_base64($body)
+            'msg' => encode_base64(encode("UTF-8", $body))
         );
         if($test_mode == 1) {
             $logger->info("** TEST MODE ** : Vacation response sent to $to from $from subject $subject (not) sent\n");

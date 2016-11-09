@@ -7,7 +7,35 @@
 # Further details on the project are available at http://postfixadmin.sf.net
 #
 # Last update:
-# $Id: CHANGELOG.TXT 1801 2015-09-26 13:11:20Z christian_boltz $
+# $Id: CHANGELOG.TXT 1861 2016-09-10 20:02:33Z christian_boltz $
+
+Version 3.0 - 2016/09/11 - SVN r1861
+-------------------------------------------------
+
+  - add sqlite backend option
+  - add configurable smtp helo (CONF["smtp_client"])
+  - new translation: ro (Romanian)
+  - language update: tw, cs, de
+  - fix escaping in gen_show_status() (could be used to DOS list-virtual by
+    creating a mail address with special chars)
+  - add CSRF protection for POST requests
+  - list.tpl: base edit/editactive/delete links in list.tpl on $RAW_item to
+    avoid double escaping, and fix some corner cases
+  - editform.tpl: add {if} block for description column for easier customization
+  - use smarty html_options instead of select_options()
+  - remove advice about using SetEnv for database password
+  - include_once(config.local.php) instead of include()ing it to prevent include
+    loops if someone copies config.inc.php to config.local.php
+  - vacation.pl: encode wide-chars utf8 in mail body, mime-decode original subject
+  - fix db_quota_text() for postgresql (concat() vs. ||)
+  - change default date for 'created' and 'updated' columns from 0000-00-00
+    (which causes problems with MySQL strict mode) to 2000-01-01
+  - allow punicode even in TLDs
+  - update Smarty to 3.1.29
+  - add checks to login.php and cli to ensure database layout is up to date
+  - whitelist '-1' as valid value for postfixadmin-cli
+  - don't stripslashes() the password in pacrypt
+  - various small bugfixes
 
 Version 3.0 beta3 (2.93) - 2015/09/26 - SVN r1802
 -------------------------------------------------
