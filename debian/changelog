@@ -1,8 +1,12 @@
 postfixadmin (3.0-1) unstable; urgency=low
 
+  [ David Goodwin ]
   * New upstream release
 
- -- David Goodwin <david@palepurple.co.uk>  Sun, 11 Sep 2016 18:42:00 +0100
+  [ Christoph Martin ]
+  * merge Debian changes
+
+ -- Christoph Martin <martin@uni-mainz.de>  Wed, 09 Nov 2016 15:43:41 +0100
 
 postfixadmin (2.93-2) unstable; urgency=medium
 
