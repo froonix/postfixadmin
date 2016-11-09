@@ -1,6 +1,7 @@
 <div id="edit_form">
 <form name="edit_{$table}" method="post" action="">
 <input class="flat" type="hidden" name="table" value="{$table}" />
+<input class="flat" type="hidden" name="token" value="{$smarty.session.PFA_token|escape:"url"}" />
 
 <table>
 	<tr>
@@ -55,7 +56,13 @@
 					{/if}
 				{/if}	
 				</td>
-				<td>{$field.desc}</td>
+				<td>
+					{if $table == 'foo' && $key == 'bar'}
+						Special handling (td content) for {$table} / {$key}
+					{else}
+						{$field.desc}
+					{/if}
+				</td>
 				<td class="error_msg">{$fielderror.{$key}}</td>
 			</tr>
 		{/if}
