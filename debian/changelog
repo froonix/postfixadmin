@@ -1,3 +1,9 @@
+postfixadmin (3.0-2) unstable; urgency=medium
+
+  * include missing files (closes: #847074)
+
+ -- Christoph Martin <martin@uni-mainz.de>  Thu, 08 Dec 2016 15:06:27 +0100
+
 postfixadmin (3.0-1) unstable; urgency=low
 
   [ David Goodwin ]
