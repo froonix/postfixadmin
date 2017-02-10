@@ -1,5 +1,5 @@
 <?php
-# $Id: VacationHandler.php 1845 2016-05-22 16:17:46Z christian_boltz $ 
+# $Id: VacationHandler.php 1890 2017-02-08 18:05:45Z christian_boltz $ 
 
 class VacationHandler extends PFAHandler {
 
@@ -21,12 +21,16 @@ class VacationHandler extends PFAHandler {
             'body'          => pacol(   1,          1,      0,      'text', 'pUsersVacation_body'           , ''                                , '' ),
             'activefrom'    => pacol(   1,          1,      1,      'text', 'pUsersVacation_activefrom'     , ''                                , '' ),
             'activeuntil'   => pacol(   1,          1,      1,      'text', 'pUsersVacation_activeuntil'    , ''                                , '' ),
-            'cache'         => pacol(   0,          0,      0,      'text', ''                              , ''                                , '' ), # leftover from 2.2
             'active'        => pacol(   1,          1,      1,      'bool', 'active'                        , ''                                 , 1 ),
             'created'       => pacol(   0,          0,      1,      'ts',   'created'                       , ''                                 ),
             'modified'      => pacol(   0,          0,      1,      'ts',   'last_modified'                 , ''                                 ),
             # TODO: add virtual 'notified' column and allow to display who received a vacation response?
         );
+
+        if ( ! db_pgsql() ) {
+            $this->struct['cache'] = pacol( 0,      0,      0,      'text', ''                              , ''                                , '' );  # leftover from 2.2
+        }
+
     }
 
     protected function initMsg() {
@@ -180,8 +184,11 @@ class VacationHandler extends PFAHandler {
             'active' => db_get_boolean(true),
             'activefrom' => $activeFrom,
             'activeuntil' => $activeUntil,
-            'cache' => '',
         );
+
+        if ( ! db_pgsql() ) {
+            $vacation_data['cache'] = '';  # leftover from 2.2
+        }
 
         // is there an entry in the vacaton table for the user, or do we need to insert?
         $table_vacation = table_by_key('vacation');

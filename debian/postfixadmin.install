@@ -10,5 +10,7 @@ smarty		usr/share/postfixadmin
 templates	usr/share/postfixadmin
 templates_c	usr/share/postfixadmin
 users		usr/share/postfixadmin
+smarty		usr/share/postfixadmin
+configs     usr/share/postfixadmin
 debian/lighttpd/90-postfixadmin.conf	etc/lighttpd/conf-available
 debian/apache/postfixadmin.conf		etc/apache2/conf-available

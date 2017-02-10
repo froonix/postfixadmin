@@ -4,7 +4,7 @@ if(!defined('POSTFIXADMIN')) {
 }
 
 /* vim: set expandtab softtabstop=4 tabstop=4 shiftwidth=4: */
-# @version $Id: upgrade.php 1853 2016-05-22 19:58:54Z christian_boltz $ 
+# @version $Id: upgrade.php 1881 2016-11-01 20:31:52Z christian_boltz $ 
 
 # Note: run with upgrade.php?debug=1 to see all SQL error messages
 
@@ -139,7 +139,7 @@ function _do_upgrade($current_version) {
 
     $target_version = 0;
     // Rather than being bound to an svn revision number, just look for the largest function name that matches upgrade_\d+...
-    // $target_version = preg_replace('/[^0-9]/', '', '$Revision: 1853 $');
+    // $target_version = preg_replace('/[^0-9]/', '', '$Revision: 1881 $');
     $funclist = get_defined_functions();
     $our_upgrade_functions = array_filter($funclist['user'], '_upgrade_filter_function');
     foreach($our_upgrade_functions as $function_name) {
@@ -1619,14 +1619,14 @@ function upgrade_1824_sqlite() {
 function upgrade_1835_mysql() {
     # change default values for existing datetime fields with a 0000-00-00 default to {DATETIME}
 
-    foreach (array('admin', 'alias', 'alias_domain', 'domain', 'mailbox', 'domain_admins', 'vacation') as $table_to_change) {
+    foreach (array('domain_admins', 'vacation') as $table_to_change) {
         $table = table_by_key($table_to_change);
         db_query_parsed("ALTER TABLE `$table` CHANGE `created` `created` {DATETIME}");
     }
 
     foreach (array('admin', 'alias', 'alias_domain', 'domain', 'mailbox') as $table_to_change) {
         $table = table_by_key($table_to_change);
-        db_query_parsed("ALTER TABLE `$table` CHANGE `modified` `modified` {DATETIME}");
+        db_query_parsed("ALTER TABLE `$table` CHANGE `created` `created` {DATETIME}, CHANGE `modified` `modified` {DATETIME}");
     }
 
     $table = table_by_key('log');
