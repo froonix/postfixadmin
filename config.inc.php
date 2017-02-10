@@ -8,7 +8,7 @@
  * 
  * Further details on the project are available at http://postfixadmin.sf.net 
  * 
- * @version $Id: config.inc.php 1833 2016-04-11 23:54:34Z christian_boltz $ 
+ * @version $Id: config.inc.php 1876 2016-10-20 21:26:13Z christian_boltz $ 
  * @license GNU GPL v2 or later. 
  * 
  * File: config.inc.php
@@ -137,7 +137,7 @@ $CONF['smtp_client'] = '';
 // system = whatever you have set as your PHP system default
 // cleartext = clear text passwords (ouch!)
 // mysql_encrypt = useful for PAM integration
-// authlib = support for courier-authlib style passwords
+// authlib = support for courier-authlib style passwords - also set $CONF['authlib_default_flavor']
 // dovecot:CRYPT-METHOD = use dovecotpw -s 'CRYPT-METHOD'. Example: dovecot:CRAM-MD5
 //     IMPORTANT:
 //     - don't use dovecot:* methods that include the username in the hash - you won't be able to login to PostfixAdmin in this case
@@ -146,6 +146,7 @@ $CONF['smtp_client'] = '';
 $CONF['encrypt'] = 'md5crypt';
 
 // In what flavor should courier-authlib style passwords be encrypted?
+// (only used if $CONF['encrypt'] == 'authlib')
 // md5 = {md5} + base64 encoded md5 hash
 // md5raw = {md5raw} + plain encoded md5 hash
 // SHA = {SHA} + base64-encoded sha1 hash
@@ -261,7 +262,7 @@ function maildir_name_hook($domain, $user) {
     PostfixAdmin, but it does not create it in the database. You have to do
     that yourself. 
     Please follow the naming policy for custom database fields and tables on
-    http://sourceforge.net/apps/mediawiki/postfixadmin/index.php?title=Custom_fields
+    https://sourceforge.net/p/postfixadmin/wiki/Custom_fields/
     to avoid clashes with future versions of PostfixAdmin.
 
     See initStruct() in the *Handler class for the default $struct.

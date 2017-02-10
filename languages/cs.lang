@@ -1,5 +1,5 @@
 <?php
-# $Id: cs.lang 1828 2016-02-16 19:01:27Z christian_boltz $
+# $Id: cs.lang 1889 2017-02-08 17:53:13Z christian_boltz $
 //
 // Czech Language Translation of PostfixAdmin
 // by Jakub
@@ -131,6 +131,7 @@ $PALANG['pCreate_alias_result_success'] = 'Přesměrování %s bylo uspěšně p
 $PALANG['alias_updated'] = 'Přesměrování %s bylo upraveno!';
 $PALANG['pCreate_alias_catchall_text'] = 'Pro vytvoření doménového koše použijte * jako alias. Pro přesměrování doména -> doména použijte *@domain.tld jako cíl.';
 $PALANG['mailbox_alias_cant_be_deleted'] = 'Toto přesměrování je svázáno s emailem a nemůže být proto vymazáno!';
+$PALANG['protected_alias_cant_be_deleted'] = 'The alias %s is protected and can only be deleted by a superadmin'; # XXX
 
 $PALANG['pEdit_alias_welcome'] = 'Upravit nastavení přesměrování.';
 $PALANG['pEdit_alias_help'] = 'Je možné zadat více cílových adres, jeden záznam na řádek.';

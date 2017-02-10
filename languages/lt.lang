@@ -1,5 +1,5 @@
 <?php
-# $Id: lt.lang 1781 2015-04-06 22:44:51Z christian_boltz $
+# $Id: lt.lang 1889 2017-02-08 17:53:13Z christian_boltz $
 //
 // Language file Lithuanian 
 // by Giedrius <giedrius_balbieris at metalot dot com>
@@ -125,6 +125,7 @@ $PALANG['pCreate_alias_result_success'] = 'Sinonimas užregistruotas!'; # XXX te
 $PALANG['alias_updated'] = 'The alias %s has been updated!'; # XXX
 $PALANG['pCreate_alias_catchall_text'] = 'Jei norite sukurti sinonimą, kuris gautų visas žinutes neegzistuojantiems adresatams, naudokite "*".';
 $PALANG['mailbox_alias_cant_be_deleted'] = 'This alias belongs to a mailbox and can\'t be deleted!'; # XXX
+$PALANG['protected_alias_cant_be_deleted'] = 'The alias %s is protected and can only be deleted by a superadmin'; # XXX
 
 
 $PALANG['pEdit_alias_welcome'] = 'Keisti persiuntimo nustatymus';

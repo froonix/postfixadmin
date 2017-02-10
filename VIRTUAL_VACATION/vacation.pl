@@ -1,8 +1,13 @@
-#!/usr/bin/perl -w
+#!/usr/bin/perl -X
+# Note  - 2017/02/08 DG :
+# Yes - I know -X (^) is not ideal.
+#       Patches are welcome to remove the dependency on Mail::Sender. 
+#       Until then, we need -X to stop it failing with warnings like 
+#       defined(@array) is deprecated at .../perl5/Mail/Sender.pm line 318. 
 #
-# Virtual Vacation 4.0r1
+# Virtual Vacation 4.0
 #
-# $Revision: 1857 $
+# $Revision: 1893 $
 # Originally by Mischa Peters <mischa at high5 dot net>
 #
 # Copyright (c) 2002 - 2005 High5!
