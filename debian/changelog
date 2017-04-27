@@ -1,3 +1,11 @@
+postfixadmin (3.0.2-2) unstable; urgency=medium
+
+  * fix mysql connection problems (closes: #861260) see:
+    https://github.com/postfixadmin/postfixadmin/issues/38 and
+    https://github.com/postfixadmin/postfixadmin/commit/6ee85ac6cc427392a1d37339e45a5dbb4b96461c
+
+ -- Christoph Martin <martin@uni-mainz.de>  Thu, 27 Apr 2017 12:43:15 +0200
+
 postfixadmin (3.0.2-1) unstable; urgency=high
 
   [ David Goodwin ]

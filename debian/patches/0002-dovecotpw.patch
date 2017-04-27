@@ -8,7 +8,7 @@ Last-Update: 2014-10-03
 This patch header follows DEP-3: http://dep.debian.net/deps/dep3/
 --- a/config.inc.php
 +++ b/config.inc.php
-@@ -150,7 +150,7 @@ $CONF['authlib_default_flavor'] = 'md5ra
+@@ -165,7 +165,7 @@ $CONF['authlib_default_flavor'] = 'md5ra
  // for dovecot 1.x
  // $CONF['dovecotpw'] = "/usr/sbin/dovecotpw";
  // for dovecot 2.x (dovecot 2.0.0 - 2.0.7 is not supported!)
