@@ -1,5 +1,5 @@
 <?php
-# $Id: bg.lang 1889 2017-02-08 17:53:13Z christian_boltz $
+# $Id$
 //
 // Language file Bulgarian
 // by Plamen Tonev
@@ -38,13 +38,13 @@ $PALANG['edit_not_allowed'] = 'You are not allowed to edit %s'; # XXX
 $PALANG['searchparams'] = 'Search parameters:'; # XXX
 $PALANG['pFooter_logged_as'] = 'Потребител %s'; # XXX # XXX Text change: 'logged in as %s' (the 'in' was missing)
 
-$PALANG['pLogin_welcome'] = 'Администратора може да се логне оттук за администриране на домейн.';
-$PALANG['pLogin_username'] = 'Логин (е-мейл)';
+$PALANG['pLogin_welcome'] = 'Администраторът може да се логне оттук, за администриране на домейн.';
+$PALANG['pLogin_username'] = "&nbsp;Логин (е-мейл)";
 $PALANG['password'] = 'Парола';
 $PALANG['pLogin_language'] = 'Language'; # XXX
 $PALANG['pLogin_button'] = 'Изход'; # XXX compare with pUsersLogin_button - should be "Login"
 $PALANG['pLogin_failed'] = 'Your email address or password are not correct.'; # XXX
-$PALANG['pLogin_login_users'] = 'Ако сте потребител натиснете тук за логване в потребителската част.';
+$PALANG['pLogin_login_users'] = 'Ако сте потребител, натиснете тук, за логване в потребителската част.';
 
 $PALANG['pMenu_main'] = 'Main'; # XXX
 $PALANG['pMenu_overview'] = 'Преглед';
@@ -144,6 +144,10 @@ $PALANG['pCreate_mailbox_username_text_error1'] = 'Е-мейл-а не е вал
 $PALANG['pCreate_mailbox_username_text_error3'] = 'Вие сте достигнали своя лимит за създаване на пощенски кутии!';
 $PALANG['pCreate_mailbox_password_text'] = 'Парола за POP3/IMAP';
 $PALANG['pCreate_mailbox_name_text'] = 'Пълно име';
+$PALANG['pCreate_mailbox_phone'] = 'Mobile phone'; # XXX
+$PALANG['pCreate_mailbox_phone_desc'] = "Used to send a SMS if the password is forgotten"; # XXX
+$PALANG['pCreate_mailbox_email'] = 'Other e-mail'; # XXX
+$PALANG['pCreate_mailbox_email_desc'] = "Used if the password is forgotten"; # XXX
 $PALANG['pCreate_mailbox_mail'] = 'Създай пощенска кутия'; # XXX Text change to 'Send Welcome mail'
 $PALANG['pCreate_mailbox_result_error'] = 'Не мога да добавя пощенската кутия в таблицата! (%s)'; # XXX Text changed to: Creating the mailbox %s failed!
 $PALANG['pCreate_mailbox_result_success'] = 'Пощенската кутия бе успешно създадена и добавена в таблицата! (%s)'; # XXX Text changed to: The mailbox %s has been added to the mailbox table!
@@ -171,6 +175,13 @@ $PALANG['pPassword_password_text_error'] = 'Паролите, които сте 
 $PALANG['change_password'] = 'Смени парола';
 $PALANG['pPassword_result_error'] = 'Не мога да сменя паролата! (%s)'; # XXX Text changed to: Changing the password for %s failed!
 $PALANG['pPassword_result_success'] = 'Паролата ви бе сменена успешно! (%s)'; # XXX Text changed to: The password for %s has been changed.
+$PALANG['pPassword_recovery_title'] = 'Follow the instructions to reset your password.'; # XXX
+$PALANG['pPassword_recovery_button'] = 'Send me the code'; # XXX
+$PALANG['pPassword_recovery_email_body'] = "Hello,\n\nUse the following link to change your email password :\n%s\n\nRegards,\n\n" . $CONF['admin_name']; # XXX
+$PALANG['pPassword_recovery_sms_body'] = "Hello,\nThe code to change your password is: %s\n" . $CONF['admin_name']; # XXX
+$PALANG['pPassword_recovery_processed'] = "We processed your request. If you entered a valid username, you'll receive an email/SMS with a password code."; # XXX
+$PALANG['pPassword_password_code'] = 'Code sent by email/SMS'; # XXX
+$PALANG['pPassword_code_text_error'] = 'Invalid code'; # XXX
 $PALANG['pEdit_vacation_set'] = 'Change / Set away message'; # XXX
 $PALANG['pEdit_vacation_remove'] = 'Remove away message'; # XXX
 $PALANG['pVacation_result_error'] = 'Updating the auto response settings for %s failed'; # XXX
@@ -186,7 +197,7 @@ $PALANG['reply_every_mail'] = 'Reply on every mail'; # XXX
 $PALANG['reply_once_per_day'] = 'Reply once a day'; # XXX
 $PALANG['reply_once_per_week'] = 'Reply once per week'; # XXX
 
-$PALANG['pViewlog_welcome'] = 'Разглеждане на последните 10 действия за ';
+$PALANG['pViewlog_welcome'] = 'Разглеждане на последните %s действия за ';
 $PALANG['pViewlog_timestamp'] = 'Дата';
 $PALANG['pViewlog_action'] = 'Действие';
 $PALANG['pViewlog_data'] = 'Данни';
@@ -292,6 +303,7 @@ $PALANG['pAdminEdit_admin_result_success'] = 'Админ-а беше модиф�
 $PALANG['pUsersLogin_welcome'] = 'Потребителски вход за смяна на парола и alias-и.';
 $PALANG['pUsersLogin_username_incorrect'] = 'Вашият логин не е правилен. Моля проверете за коректност на вашият е-мейл адрес!';
 $PALANG['pUsersLogin_password_incorrect'] = 'Вашата парола не е правилна!';
+$PALANG['pUsersLogin_password_recover'] = 'I forgot my password'; # XXX
 
 $PALANG['pUsersMenu_vacation'] = 'Автоматичен отговор';
 $PALANG['pUsersMenu_edit_alias'] = 'Смяна на пренасочването';
@@ -323,6 +335,8 @@ $PALANG['pBroadcast_name'] = 'Име';
 $PALANG['pBroadcast_success'] = 'Вашето съобщение беше изпратено.';
 $PALANG['pAdminMenu_broadcast_message'] = 'Съобщение до всички';
 $PALANG['pBroadcast_error_empty'] = 'Полетата Име, Заглавие и Съобщение са задължителни!';
+$PALANG['broadcast_mailboxes_only'] = 'Only send to mailboxes'; # XXX
+$PALANG['broadcast_to_domains'] = 'Send to domains:'; # XXX
 $PALANG['pStatus_undeliverable'] = 'maybe UNDELIVERABLE '; # XXX
 $PALANG['pStatus_custom'] = 'Delivers to '; # XXX
 $PALANG['pStatus_popimap'] = 'POP/IMAP '; # XXX

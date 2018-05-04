@@ -8,7 +8,7 @@
 # 
 # Further details on the project are available at http://postfixadmin.sf.net 
 # 
-# @version $Id: convert-passwd-to-postfixadmin.pl 1558 2013-11-10 15:57:32Z christian_boltz $ 
+# @version $Id$ 
 # @license GNU GPL v2 or later. 
 #
 #
