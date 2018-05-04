@@ -1,2 +1,2 @@
 version=3
-http://sf.net/postfixadmin/postfixadmin-([\d\.]+)\.tar\.gz
+https://github.com/postfixadmin/postfixadmin/releases .*/archive/postfixadmin-(\d[\d.]*)\.tar\.gz
