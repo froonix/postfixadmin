@@ -1,5 +1,5 @@
 <?php
-# $Id: mk.lang 1889 2017-02-08 17:53:13Z christian_boltz $
+# $Id$
 //
 // Language file Macedonian
 // by Damjan Georgiev <dame at mol dot com dot mk>
@@ -143,6 +143,10 @@ $PALANG['pCreate_mailbox_username_text_error1'] = 'EMAIL не е валиден!
 $PALANG['pCreate_mailbox_username_text_error3'] = 'Достигнат е лимитот на поштенски сандачиња!';
 $PALANG['pCreate_mailbox_password_text'] = 'Лозинка за POP3/IMAP';
 $PALANG['pCreate_mailbox_name_text'] = 'Цело име';
+$PALANG['pCreate_mailbox_phone'] = 'Mobile phone'; # XXX
+$PALANG['pCreate_mailbox_phone_desc'] = "Used to send a SMS if the password is forgotten"; # XXX
+$PALANG['pCreate_mailbox_email'] = 'Other e-mail'; # XXX
+$PALANG['pCreate_mailbox_email_desc'] = "Used if the password is forgotten"; # XXX
 $PALANG['pCreate_mailbox_mail'] = 'Креирање на поштенско сандаче'; # XXX Text change to 'Send Welcome mail'
 $PALANG['pCreate_mailbox_result_error'] = 'Не можам да додадам ново сандаче на табелата! (%s)'; # XXX Text changed to: Creating the mailbox %s failed!
 $PALANG['pCreate_mailbox_result_success'] = 'Поштенското сандаче е додадено на табелата! (%s)'; # XXX Text changed to: The mailbox %s has been added to the mailbox table!
@@ -170,6 +174,13 @@ $PALANG['pPassword_password_text_error'] = 'Внесените лозинки н
 $PALANG['change_password'] = 'Промена на лозинка';
 $PALANG['pPassword_result_error'] = 'Не можам да ја променам вашата лозинка! (%s)'; # XXX Text changed to: Changing the password for %s failed!
 $PALANG['pPassword_result_success'] = 'Вашата лозинка е сменета! (%s)'; # XXX Text changed to: The password for %s has been changed.
+$PALANG['pPassword_recovery_title'] = 'Follow the instructions to reset your password.'; # XXX
+$PALANG['pPassword_recovery_button'] = 'Send me the code'; # XXX
+$PALANG['pPassword_recovery_email_body'] = "Hello,\n\nUse the following link to change your email password :\n%s\n\nRegards,\n\n" . $CONF['admin_name']; # XXX
+$PALANG['pPassword_recovery_sms_body'] = "Hello,\nThe code to change your password is: %s\n" . $CONF['admin_name']; # XXX
+$PALANG['pPassword_recovery_processed'] = "We processed your request. If you entered a valid username, you'll receive an email/SMS with a password code."; # XXX
+$PALANG['pPassword_password_code'] = 'Code sent by email/SMS'; # XXX
+$PALANG['pPassword_code_text_error'] = 'Invalid code'; # XXX
 $PALANG['pEdit_vacation_set'] = 'Change / Set away message'; # XXX
 $PALANG['pEdit_vacation_remove'] = 'Remove away message'; # XXX
 $PALANG['pVacation_result_error'] = 'Updating the auto response settings for %s failed'; # XXX
@@ -185,7 +196,7 @@ $PALANG['reply_every_mail'] = 'Reply on every mail'; # XXX
 $PALANG['reply_once_per_day'] = 'Reply once a day'; # XXX
 $PALANG['reply_once_per_week'] = 'Reply once per week'; # XXX
 
-$PALANG['pViewlog_welcome'] = 'Преглед на последните 10 операции за: ';
+$PALANG['pViewlog_welcome'] = 'Преглед на последните %s операции за: ';
 $PALANG['pViewlog_timestamp'] = 'Маркер (Timestamp)';
 $PALANG['pViewlog_action'] = 'Операција';
 $PALANG['pViewlog_data'] = 'Датум';
@@ -292,6 +303,7 @@ $PALANG['pAdminEdit_admin_result_success'] = 'Администраторот е 
 $PALANG['pUsersLogin_welcome'] = 'Логин за корисници на поштенски сандачиња.Промена на логин и лозинка';
 $PALANG['pUsersLogin_username_incorrect'] = 'Погрешно корисничко име. Логирајте се со вашата email адреса!';
 $PALANG['pUsersLogin_password_incorrect'] = 'Погрешна лозинка!';
+$PALANG['pUsersLogin_password_recover'] = 'I forgot my password'; # XXX
 
 $PALANG['pUsersMenu_vacation'] = 'Автоматски одговор';
 $PALANG['pUsersMenu_edit_alias'] = 'Промена на препраќање (forward)';
@@ -323,6 +335,8 @@ $PALANG['pBroadcast_name'] = 'Your name'; # XXX
 $PALANG['pBroadcast_success'] = 'Your broadcast message was sent.'; # XXX
 $PALANG['pAdminMenu_broadcast_message'] = 'Broadcast message'; # XXX
 $PALANG['pBroadcast_error_empty'] = 'The fields Name, Subject and Message shouldn\'t be empty!'; # XXX
+$PALANG['broadcast_mailboxes_only'] = 'Only send to mailboxes'; # XXX
+$PALANG['broadcast_to_domains'] = 'Send to domains:'; # XXX
 $PALANG['pStatus_undeliverable'] = 'maybe UNDELIVERABLE '; # XXX
 $PALANG['pStatus_custom'] = 'Delivers to '; # XXX
 $PALANG['pStatus_popimap'] = 'POP/IMAP '; # XXX

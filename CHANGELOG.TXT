@@ -5,9 +5,60 @@
 # this package in the file LICENSE.TXT.
 #
 # Further details on the project are available at http://postfixadmin.sf.net
-#
-# Last update:
-# $Id: CHANGELOG.TXT 1895 2017-02-08 20:46:10Z christian_boltz $
+
+Version 3.2 - 2018/05/02
+-------------------------------------------------
+
+  - move public facing stuff into public/, this allows us to stop exposing
+    templates_c/ etc. to the world (but also means you'll need to adjust your
+    webserver config)
+  - enable users to reset their passwords by mail or SMS
+    ($CONF['forgotten_user_password_reset'],
+    $CONF['forgotten_admin_password_reset'], $CONF['sms_send_function'])
+  - allow local alias targets (without @domain) - see #134
+  - add $CONF['edit_alias'] to disable "edit_alias" function for users
+  - add php_crypt $CONF["encrypt"] option (see #170 for examples)
+  - add random_compat phar (see: https://github.com/paragonie/random_compat) to
+    support random_int()/random_string() in older PHP versions.
+  - add support for MySQL connections over SSL
+  - language updates: sk, ja, nl, bg, fr, cz
+  - update bundled smarty library (lib/smarty to 3.1.32; includes security fixes)
+  - split up pacrypt() into different functions; add some minimal test coverage
+  - add id autoincrement field to log table (#89)
+  - add token to login.php to prevent CSRF
+  - lots of bugfixes and code cleanup
+  - drop unused code in postfixadmin-cli
+  - introduce PHP-CS-Fixer to enforce code style
+  - vacation.pl:
+    - avoid answering to more known autoresponders
+    - add $no_vacation_pattern to avoid sending autoresponders based on the To:
+      address
+    - replace Deprecated Mail::Sender by Email::Sender
+    - use MIME:EncWords
+    - remove unused MIME::Base64
+  - add docker repo, see https://github.com/postfixadmin/docker
+
+Version 3.1 - 2017/06/25
+-------------------------------------------------
+
+  - broadcast improvements:
+    - allow to send to mailboxes only
+    - allow to send to only some domains
+    - allow domain admins to send to their domains - new config option
+      $CONF['sendmail_all_admins']
+    - don't send to inactive mailboxes or aliases
+  - update squirrelmail plugin
+  - better static DB connection cache to avoid hundreds of mysqli connection
+    when doing lots of escape_string() calls
+  - use $CONF[page_size] in viewlog.php
+  - fix problems with utf8mb4 as default charset in setup.php/upgrade.php
+  - fix default for $CONF[create_mailbox_subdirs_hostoptions]
+  - get rid of variables.inc.php (and initialize variables where needed)
+  - add favicon to fix session handling in chrome (#44)
+  - add check to ensure templates_c/ exists and is writeable
+  - recommend usage of config.local.php in setup.php
+  - remove php4 constructor from cNav_bar (page browser)
+  - update fr.lang
 
 Version 3.0.2 - 2017/02/08 - SVN r1895
 -------------------------------------------------

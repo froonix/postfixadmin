@@ -1,5 +1,5 @@
 <?php
-# $Id: sv.lang 1889 2017-02-08 17:53:13Z christian_boltz $
+# $Id$
 //
 // Language file Swedish
 // by Stefan Jakobsson <stefan at katrinet dot se>
@@ -146,6 +146,10 @@ $PALANG['pCreate_mailbox_username_text_error1'] = 'E-postadressen är inte korre
 $PALANG['pCreate_mailbox_username_text_error3'] = 'Du har redan skapat max tillåtet antal brevlådor!';
 $PALANG['pCreate_mailbox_password_text'] = 'Lösenord för POP3/IMAP';
 $PALANG['pCreate_mailbox_name_text'] = 'Fullständigt namn';
+$PALANG['pCreate_mailbox_phone'] = 'Mobile phone'; # XXX
+$PALANG['pCreate_mailbox_phone_desc'] = "Used to send a SMS if the password is forgotten"; # XXX
+$PALANG['pCreate_mailbox_email'] = 'Other e-mail'; # XXX
+$PALANG['pCreate_mailbox_email_desc'] = "Used if the password is forgotten"; # XXX
 $PALANG['pCreate_mailbox_mail'] = 'Skicka välkomstmeddelande'; # XXX Text change to 'Send Welcome mail'
 $PALANG['pCreate_mailbox_result_error'] = 'Misslyckades att skapa brevlådan %s!';
 $PALANG['pCreate_mailbox_result_success'] = 'Brevlådan %s har skapats!';
@@ -173,6 +177,13 @@ $PALANG['pPassword_password_text_error'] = 'Lösenorden du angav är olika, elle
 $PALANG['change_password'] = 'Ändra lösenord';
 $PALANG['pPassword_result_error'] = 'Misslyckades att ändra lösenordet för %s!';
 $PALANG['pPassword_result_success'] = 'Lösenord för %s har ändrats!';
+$PALANG['pPassword_recovery_title'] = 'Follow the instructions to reset your password.'; # XXX
+$PALANG['pPassword_recovery_button'] = 'Send me the code'; # XXX
+$PALANG['pPassword_recovery_email_body'] = "Hello,\n\nUse the following link to change your email password :\n%s\n\nRegards,\n\n" . $CONF['admin_name']; # XXX
+$PALANG['pPassword_recovery_sms_body'] = "Hello,\nThe code to change your password is: %s\n" . $CONF['admin_name']; # XXX
+$PALANG['pPassword_recovery_processed'] = "We processed your request. If you entered a valid username, you'll receive an email/SMS with a password code."; # XXX
+$PALANG['pPassword_password_code'] = 'Code sent by email/SMS'; # XXX
+$PALANG['pPassword_code_text_error'] = 'Invalid code'; # XXX
 
 $PALANG['pEdit_vacation_set'] = 'Ändra / Aktivera meddelande för ledighet';
 $PALANG['pEdit_vacation_remove'] = 'Ta bort meddelande för ledighet';
@@ -190,7 +201,7 @@ $PALANG['reply_every_mail'] = 'Svara på varje meddelande';
 $PALANG['reply_once_per_day'] = 'Svara en gång om dagen';
 $PALANG['reply_once_per_week'] = 'Svara en gång i veckan';
 
-$PALANG['pViewlog_welcome'] = 'Visa de senaste 10 åtgärderna för ';
+$PALANG['pViewlog_welcome'] = 'Visa de senaste %s åtgärderna för ';
 $PALANG['pViewlog_timestamp'] = 'Tidpunkt';
 $PALANG['pViewlog_action'] = 'Åtgärd';
 $PALANG['pViewlog_data'] = 'Data';
@@ -298,6 +309,7 @@ $PALANG['pAdminEdit_admin_result_success'] = 'Admin har ändrats! (%s)'; # XXX T
 $PALANG['pUsersLogin_welcome'] = 'Användare måste logga in här för att ändra lösenord och alias.';
 $PALANG['pUsersLogin_username_incorrect'] = 'Inloggningsnamnet är felaktigt. Logga in med din e-postadress!';
 $PALANG['pUsersLogin_password_incorrect'] = 'Lösenord är felaktigt!';
+$PALANG['pUsersLogin_password_recover'] = 'I forgot my password'; # XXX
 
 $PALANG['pUsersMenu_vacation'] = 'Autosvar';
 $PALANG['pUsersMenu_edit_alias'] = 'Ändra din vidarebefordringsadress';
@@ -331,6 +343,8 @@ $PALANG['pBroadcast_name'] = 'Ditt namn';
 $PALANG['pBroadcast_success'] = 'Ditt grupputskick har sänts.';
 $PALANG['pAdminMenu_broadcast_message'] = 'Grupputskick';
 $PALANG['pBroadcast_error_empty'] = 'Fälten namn, ämne och meddelande ska inte vara tomma!';
+$PALANG['broadcast_mailboxes_only'] = 'Only send to mailboxes'; # XXX
+$PALANG['broadcast_to_domains'] = 'Send to domains:'; # XXX
 
 $PALANG['pStatus_undeliverable'] = 'kan eventuellt ej levereras ';
 $PALANG['pStatus_custom'] = 'Levereras till ';

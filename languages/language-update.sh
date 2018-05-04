@@ -8,7 +8,7 @@
  #
  # Further details on the project are available at http://postfixadmin.sf.net 
  #
- # @version $Id: language-update.sh 1686 2014-09-12 09:52:21Z christian_boltz $
+ # @version $Id$
  # @license GNU GPL v2 or later.
  #
  # File: language-update.sh
