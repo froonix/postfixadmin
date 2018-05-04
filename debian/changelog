@@ -1,3 +1,12 @@
+postfixadmin (3.2-1) unstable; urgency=medium
+
+  [ Christoph Martin ]
+  * Move watch target to github
+  * Move Vcs-* to Salsa
+  * New upstream version 3.2
+
+ -- Christoph Martin <martin@uni-mainz.de>  Fri, 04 May 2018 11:39:57 +0200
+
 postfixadmin (3.0.2-2) unstable; urgency=medium
 
   * fix mysql connection problems (closes: #861260) see:
