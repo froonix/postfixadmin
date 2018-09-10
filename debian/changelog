@@ -1,3 +1,9 @@
+postfixadmin (3.2-2) unstable; urgency=medium
+
+  * reupload with missing public folder included (closes: #908317)
+
+ -- Christoph Martin <martin@uni-mainz.de>  Mon, 10 Sep 2018 11:40:37 +0200
+
 postfixadmin (3.2-1) unstable; urgency=medium
 
   [ Christoph Martin ]
