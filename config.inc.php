@@ -629,20 +629,18 @@ $CONF['sms_send_function'] = '';
 
 /*
 // Example of send SMS function using Clickatell HTTP API
-function x_send_sms_clickatell($to, $message) {
+function x_send_sms_clickatell($to, $message)
+{
+	$clickatell_api_id   = 'CHANGEME';
+	$clickatell_user     = 'CHANGEME';
+	$clickatell_password = 'CHANGEME';
 
-    $clickatell_api_id = 'CHANGEME';
-    $clickatell_user = 'CHANGEME';
-    $clickatell_password = 'CHANGEME';
-    $clickatell_sender = 'CHANGEME';
+	$url = 'https://api.clickatell.com/http/sendmsg?api_id=%s&user=%s&password=%s&to=%s&text=%s';
+	$url = vsprintf($url, array_map('urlencode', [$clickatell_api_id, $clickatell_user, $clickatell_password, $to, $message]));
 
-    $url = 'https://api.clickatell.com/http/sendmsg?api_id=%s&user=%s&password=%s&to=%s&from=%s&text=%s';
+	$result = file_get_contents($url);
 
-    $url = sprintf($url, $clickatell_api_id, $clickatell_user, $clickatell_password, $to, $clickatell_sender, urlencode($message));
-
-    $result = file_get_contents($url);
-
-    return $result !== false;
+	return ($result !== false && preg_match('#^ID: .+$#', $result));
 }
 */
 
