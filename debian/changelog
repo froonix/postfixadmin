@@ -1,3 +1,9 @@
+postfixadmin (3.2-4) UNRELEASED; urgency=medium
+
+  * d/rules: Remove trailing whitespaces
+
+ -- Ondřej Nový <onovy@debian.org>  Mon, 01 Oct 2018 09:55:42 +0200
+
 postfixadmin (3.2-3) unstable; urgency=medium
 
   * include missing lib folder (closes: #908605)
