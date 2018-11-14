@@ -1,6 +1,11 @@
+<<<<<<< HEAD
 postfixadmin (3.2-4) unstable; urgency=medium
 
+  [ Christoph Martin ]
   * fix sqlite database upgrade (closes: #909263)
+
+  [ Ondřej Nový ]
+  * d/rules: Remove trailing whitespaces
 
  -- Christoph Martin <martin@uni-mainz.de>  Fri, 28 Sep 2018 11:19:19 +0200
 
