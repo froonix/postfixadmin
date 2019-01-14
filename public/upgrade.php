@@ -78,6 +78,8 @@ function _db_field_exists($table, $field) {
     global $CONF;
     if ($CONF['database_type'] == 'pgsql') {
         return _pgsql_field_exists($table, $field);
+    } elseif ($CONF['database_type'] == 'sqlite') {
+        return _sqlite_field_exists($table, $field);
     } else {
         return _mysql_field_exists($table, $field);
     }
@@ -90,7 +92,7 @@ function _db_add_field($table, $field, $fieldtype, $after) {
     global $CONF;
 
     $query = "ALTER TABLE " . table_by_key($table) . " ADD COLUMN $field $fieldtype";
-    if ($CONF['database_type'] != 'pgsql') {
+    if ($CONF['database_type'] == 'mysql') {
         $query .= " AFTER $after "; # PgSQL does not support to specify where to add the column, MySQL does
     }
 
@@ -1679,6 +1681,11 @@ function upgrade_1836_mysql() {
 }
 
 function upgrade_1837() {
+    global $CONF;
+
+    if ($CONF['database_type'] == 'sqlite') {
+        return;
+    }
     # alternative contact means to reset a forgotten password
     foreach (array('admin', 'mailbox') as $table) {
         _db_add_field($table, 'phone', "varchar(30) {UTF-8} NOT NULL DEFAULT ''", 'active');
@@ -1718,11 +1725,38 @@ function upgrade_1837_sqlite() {
 /* https://github.com/postfixadmin/postfixadmin/issues/89 */
 # upgrade_1838_mysql() renamed to upgrade_1839() to keep all databases in sync
 function upgrade_1839() {
-    _db_add_field('log', 'id', '{AUTOINCREMENT} {PRIMARY}', 'data');
+    if(!db_sqlite()) {
+        return _db_add_field('log', 'id', '{AUTOINCREMENT} {PRIMARY}', 'data');
+    }
+
+    /* ONLY FOR Sqlite */
+    // probably didn't have a working log table, so drop it and recreate with an id field.
+    $log_table = table_by_key('log');
+    db_query_parsed("DROP TABLE IF EXISTS $log_table");
+
+    db_query_parsed("
+         CREATE TABLE $log_table (
+          `id` {AUTOINCREMENT},
+          `timestamp` {DATE},
+          `username` varchar(255) NOT NULL,
+          `domain` varchar(255) NOT NULL,
+          `action` varchar(255) NOT NULL,
+          `data` {FULLTEXT} NOT NULL);
+");
 }
 
 function upgrade_1840_mysql_pgsql() {
     # sqlite doesn't support changing the default value
     $vacation = table_by_key('vacation');
     db_query_parsed("ALTER TABLE $vacation ALTER COLUMN activeuntil SET DEFAULT '2038-01-18'");
+}
+
+/* try and fix: https://github.com/postfixadmin/postfixadmin/issues/177 - sqlite missing columns */
+function upgrade_1841_sqlite() {
+    foreach (array('admin', 'mailbox') as $table) {
+        _db_add_field($table, 'phone', "varchar(30) {UTF-8} NOT NULL DEFAULT ''", 'active');
+        _db_add_field($table, 'email_other', "varchar(255) {UTF-8} NOT NULL DEFAULT ''", 'phone');
+        _db_add_field($table, 'token', "varchar(255) {UTF-8} NOT NULL DEFAULT ''", 'email_other');
+        _db_add_field($table, 'token_validity', '{DATETIME}', 'token');
+    }
 }

@@ -61,7 +61,7 @@ require_once("$incpath/config.inc.php");
 
 if (isset($CONF['configured'])) {
     if ($CONF['configured'] == false) {
-        die("Please edit config.inc.php - change \$CONF['configured'] to true after setting your database settings");
+        die("Please edit config.local.php - change \$CONF['configured'] to true after setting your database settings");
     }
 }
 
@@ -69,7 +69,9 @@ Config::write($CONF);
 
 require_once("$incpath/languages/language.php");
 require_once("$incpath/functions.inc.php");
-require_once("$incpath/lib/random_compat.phar");
+if(extension_loaded('Phar')) {
+    require_once("$incpath/lib/random_compat.phar");
+}
 
 if (defined('POSTFIXADMIN_CLI')) {
     $language = 'en'; # TODO: make configurable or autodetect from locale settings

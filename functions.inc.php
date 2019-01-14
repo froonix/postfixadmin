@@ -525,7 +525,7 @@ function create_page_browser($idxfield, $querypart) {
     }
 
     # init row counter
-    $initcount = "SET @row=-1";
+    $initcount = "SET @r=-1";
     if (db_pgsql()) {
         $initcount = "CREATE TEMPORARY SEQUENCE rowcount MINVALUE 0";
     }
@@ -537,8 +537,8 @@ function create_page_browser($idxfield, $querypart) {
     $page_size_zerobase = $page_size - 1;
     $query = "
         SELECT * FROM (
-            SELECT $idxfield AS label, @row := @row + 1 AS row $querypart
-        ) idx WHERE MOD(idx.row, $page_size) IN (0,$page_size_zerobase) OR idx.row = $count_results
+            SELECT $idxfield AS label, @r := @r + 1 AS 'r' $querypart
+        ) idx WHERE MOD(idx.r, $page_size) IN (0,$page_size_zerobase) OR idx.r = $count_results
     ";
 
     if (db_pgsql()) {
@@ -832,6 +832,12 @@ function encode_header($string, $default_charset = "utf-8") {
 
 
 
+/**/ if (!function_exists('random_int')) { # random_int() is available since PHP 7, compat wrapper for PHP 5.x
+    function random_int($min, $max) {
+        return mt_rand($min, $max);
+    }
+/**/ }
+
 /**
  * Generate a random password of $length characters.
  * @param int $length (optional, default: 12)
@@ -846,11 +852,7 @@ function generate_password($length = 12) {
     // add random characters to $password until $length is reached
     $password = "";
     while (strlen($password) < $length) {
-        if (function_exists('random_int')) {
-            $random = random_int(0, strlen($possible) -1);
-        } else {
-            $random = mt_rand(0, strlen($possible) - 1);
-        }
+        $random = random_int(0, strlen($possible) -1);
         $char = substr($possible, $random, 1);
 
         // we don't want this character if it's already in the password
@@ -1137,18 +1139,9 @@ function _php_crypt_generate_crypt_salt($hash_type='SHA512') {
  * @return string of given $length
  */
 function _php_crypt_random_string($characters, $length) {
-    $random_int_exists = true;
-    if (!function_exists('random_int')) {
-        $random_int_exists = false;
-    }
     $string = '';
     for ($p = 0; $p < $length; $p++) {
-        if ($random_int_exists) {
-            $string .= $characters[random_int(0, strlen($characters) -1)];
-        } else {
-            // should really use a stronger randomness source
-            $string .= $characters[mt_rand(0, strlen($characters) - 1)];
-        }
+        $string .= $characters[random_int(0, strlen($characters) -1)];
     }
     return $string;
 }
@@ -1345,6 +1338,7 @@ function smtp_mail($to, $from, $data, $body = "") {
             . "From: " . $from . "\n"
             . "Subject: " . encode_header($data) . "\n"
             . "MIME-Version: 1.0\n"
+            . "Date: " . date('r') . "\n"
             . "Content-Type: text/plain; charset=utf-8\n"
             . "Content-Transfer-Encoding: 8bit\n"
             . "\n"
@@ -1532,9 +1526,8 @@ function db_connect($ignore_errors = false) {
 
 /**
  * Returns the appropriate boolean value for the database.
- * Currently only PostgreSQL and MySQL are supported.
  * @param boolean $bool (REQUIRED)
- * @return String or int as appropriate.
+ * @return string|int as appropriate for underlying db platform
  */
 function db_get_boolean($bool) {
     if (! (is_bool($bool) || $bool == '0' || $bool == '1')) {
@@ -1994,7 +1987,13 @@ function db_where_clause($condition, $struct, $additional_raw_where = '', $searc
         } elseif ($operator == "NOTNULL") {
             $querypart = $field . ' IS NOT NULL';
         } else {
+
             $querypart = $field . $operator . "'" . escape_string($value) . "'";
+
+            // might need other types adding here.
+            if (db_pgsql() && isset($struct[$field]) && in_array($struct[$field]['type'], array('ts', 'num')) && $value === '') {
+                $querypart = $field . $operator . " NULL";
+            }
         }
 
         if (!empty($struct[$field]['select'])) {
@@ -2133,6 +2132,42 @@ function gen_show_status($show_alias) {
         } // while
         if ($stat_ok == 0) {
             $stat_string .= "<span style='background-color:" . $CONF['show_undeliverable_color'] . "'>" . $CONF['show_status_text'] . "</span>&nbsp;";
+        } else {
+            $stat_string .= $CONF['show_status_text'] . "&nbsp;";
+        }
+    }
+
+    // Vacation CHECK
+    if ( $CONF['show_vacation'] == 'YES' ) {
+        $stat_result = db_query("SELECT * FROM ". $CONF['database_tables']['vacation'] ." WHERE email = '" . $show_alias . "' AND active = '" . db_get_boolean(true) . "'") ;
+        if ($stat_result['rows'] == 1) {
+            $stat_string .= "<span style='background-color:" . $CONF['show_vacation_color'] . "'>" . $CONF['show_status_text'] . "</span>&nbsp;";
+        } else {
+            $stat_string .= $CONF['show_status_text'] . "&nbsp;";
+        }
+    }
+
+    // Disabled CHECK
+    if ( $CONF['show_disabled'] == 'YES' ) {
+        $stat_result = db_query("SELECT * FROM ". $CONF['database_tables']['mailbox'] ." WHERE username = '" . $show_alias . "' AND active = '" . db_get_boolean(false) . "'");
+        if ($stat_result['rows'] == 1) {
+            $stat_string .= "<span style='background-color:" . $CONF['show_disabled_color'] . "'>" . $CONF['show_status_text'] . "</span>&nbsp;";
+        } else {
+            $stat_string .= $CONF['show_status_text'] . "&nbsp;";
+        }
+    }
+
+    // Expired CHECK
+    if ( Config::bool('password_expiration') && Config::bool('show_expired') ) {
+        $now = 'now()';
+        if (db_sqlite()) {
+            $now = "datetime('now')";
+        }
+
+        $stat_result = db_query("SELECT * FROM ". $CONF['database_tables']['mailbox'] ." WHERE username = '" . $show_alias . "' AND password_expiry <= $now AND active = '" . db_get_boolean(true) . "'");
+
+        if ($stat_result['rows'] == 1) {
+            $stat_string .= "<span style='background-color:" . $CONF['show_expired_color'] . "'>" . $CONF['show_status_text'] . "</span>&nbsp;";
         } else {
             $stat_string .= $CONF['show_status_text'] . "&nbsp;";
         }
