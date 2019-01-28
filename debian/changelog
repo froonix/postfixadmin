@@ -1,3 +1,9 @@
+postfixadmin (3.2.1-2) unstable; urgency=medium
+
+  * remove backported code which results in errors (closes: #920564)
+
+ -- Christoph Martin <martin@uni-mainz.de>  Mon, 28 Jan 2019 11:50:33 +0100
+
 postfixadmin (3.2.1-1) unstable; urgency=medium
 
   * fix debian/changelog
