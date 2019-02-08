@@ -1,3 +1,9 @@
+postfixadmin (3.2.1-2.1+fnx1) unstable; urgency=medium
+
+  * Fix missing SSL at persistent MySQLi reconnect
+
+ -- Christian Schrötter <cs@fnx.li>  Sat, 09 Feb 2019 00:33:00 +0100
+
 postfixadmin (3.2.1-2) unstable; urgency=medium
 
   * remove backported code which results in errors (closes: #920564)
