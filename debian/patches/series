@@ -1,3 +1,4 @@
 0001-db_credentials.patch
 0002-dovecotpw.patch
 0004-remove-backported-checks.patch
+0005-mysqli-persistent-ssl-bugfix.patch
