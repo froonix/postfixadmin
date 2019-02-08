@@ -1,3 +1,9 @@
+postfixadmin (3.2.1-2.1+fnx2) unstable; urgency=medium
+
+  * Hide version output in footer
+
+ -- Christian Schrötter <cs@fnx.li>  Sat, 09 Feb 2019 00:54:00 +0100
+
 postfixadmin (3.2.1-2.1+fnx1) unstable; urgency=medium
 
   * Fix missing SSL at persistent MySQLi reconnect
